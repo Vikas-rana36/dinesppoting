@@ -1,0 +1,132 @@
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;700;800;900&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+font-family: 'Raleway', sans-serif;
+}
+
+.login-page {
+  overflow: hidden;
+  min-height: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
+img.eye-icon {
+    float: right !important;
+    display: inline-block;
+    margin-top: -32px;
+    margin-right: 20px;
+    width: 19px;
+    height: 19px;
+}
+
+@media screen and (min-width: 1200px)
+{
+    img.eye-icon {
+        margin-top: -32px;
+        margin-right: 20px;
+    }
+}
+
+
+
+
+
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+
+
+/*--new-login--*/
+.form-wrap input{
+ 
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        line-height: 1.5;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(225,223,236,1);
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 30px;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        align-items: center;
+}
+
+
+.login .form-wrap {
+    width: 85%;
+    margin: auto;
+}
+.login .form-wrap input::placeholder{
+    color: #8C87A6;
+        font-size: 14px;
+}
+.login .form-wrap label{
+    font-size: 14px;
+}
+.btn-primary {
+    background-color: #ff5858;
+    color: #fff;
+    padding: 8px 16px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #FF5858;
+    border-radius: 30px;
+    text-align: center;
+    align-items: center;
+    outline: none;
+}
+.login .form-wrap a {
+    color: #ff5858;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.login .form-wrap h2{
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+    margin: 15px 0 10px;
+    font-weight: 700;
+
+}
+.login p {
+    font-size: 14px;
+    display: block;
+    font-weight: 600;
+    color: rgb(91 86 117);
+    margin-bottom: 20px;
+}
+.login-img-wrap img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    right: 0;
+    object-fit: cover;
+    height: 100%;
+}
+.login {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+}
+.login  .form-wrap{
+    height:100vh;
+}
+.form-auto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}

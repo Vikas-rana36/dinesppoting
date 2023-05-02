@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-12">
+        <section>
+            <div class="container p-0">
+                <form [formGroup]="profileForm" (ngSubmit)="onEditSubmit()" class="form-wrap card p-4">
+                <div class="profile-wrap ">       
+                        <div class="row mb-4">
+                            <div class="form-group col-md-6 mb-0">
+                                <label>First name</label>
+                                <input formControlName="first_name" type="text" class="form-control" placeholder="john">
+                                <p class="errorCls" *ngIf="formRef['first_name'].touched || isProfileFormSubmitted">
+                                    <app-form-validation-errors errorPrefix="First name" [errors]="formRef['first_name'].errors || []"></app-form-validation-errors>
+                                </p>
+                            </div>
+                            <div class="form-group col-md-6  mb-0">
+                                <label>Last name</label>
+                                <input formControlName="last_name" type="text" class="form-control" placeholder="due">
+                                <p class="errorCls" *ngIf="formRef['last_name'].touched || isProfileFormSubmitted">
+                                    <app-form-validation-errors errorPrefix="Last name" [errors]="formRef['last_name'].errors || []"></app-form-validation-errors>
+                                </p>
+                            </div>
+        
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6  mb-0">
+                                <label>Phone number</label>
+                                <input formControlName="phone_number" type="text" class="form-control" placeholder="due">
+                                <p class="errorCls" *ngIf="formRef['phone_number'].touched || isProfileFormSubmitted">
+                                    <app-form-validation-errors errorPrefix="Phone number" [errors]="formRef['phone_number'].errors || []"></app-form-validation-errors>
+                                </p>
+                            </div>
+                            <div class="form-group col-md-6  mb-0">
+                                <label>Email address</label>
+                                <input formControlName="email" type="text" class="form-control" placeholder="due" readonly>
+                                
+                            </div>          
+                        </div>
+                        <button [disabled]="!profileForm.valid" data-bs-dismiss="modal" type="submit" class="btn btn-primary mt-4" >Submit</button>
+                </div>
+                </form>
+            </div>
+        </section>     
+    </div>
+</div>
+<!--End-->        

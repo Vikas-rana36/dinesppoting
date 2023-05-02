@@ -1,0 +1,131 @@
+<div class="contact-main">
+  <div class="conatiner">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="contact-image">
+          <img src="../../../../assets/img/detail-1.png" />
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="col-12 contact-head">
+          <h2>Contact Us</h2>
+          <p>Got a suggestion for us? Fill out this form and let us know!</p>
+        </div>
+        <div class="contact-form">
+          <form
+            class="row g-3"
+            [formGroup]="contactForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <div class="col-md-6 col-lg-6 col-12 form-group">
+              <label for="inputName" class="form-label"
+                >First Name
+                <span
+                  style="
+                    color: red;
+                    font-size: 30px;
+                    line-height: 17px;
+                    margin-top: 5px;
+                  "
+                  >*</span
+                ></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="inputName"
+                placeholder="John"
+                formControlName="first_name"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="contactForm.get('first_name')?.touched || isFormSubmit"
+              >
+                <div *ngIf="contactForm.get('first_name')?.errors?.required">
+                  Name is required
+                </div>
+                <div *ngIf="contactForm.get('first_name')?.errors?.pattern">
+                  Enter alphabets only.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-12 form-group">
+              <label for="inputSubject" class="form-label">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputSubject"
+                placeholder="John"
+                formControlName="last_name"
+              />
+            </div>
+            <div class="col-12 form-group">
+              <label for="inputEmail" class="form-label"
+                >Email
+                <span
+                  style="
+                    color: red;
+                    font-size: 30px;
+                    line-height: 17px;
+                    margin-top: 5px;
+                  "
+                  >*</span
+                ></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="inputEmail"
+                placeholder="John@yopmail.com"
+                formControlName="email"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="contactForm.get('email')?.touched || isFormSubmit"
+              >
+                <div *ngIf="contactForm.get('email')?.errors?.required">
+                  Email is required
+                </div>
+                <div *ngIf="contactForm.get('email')?.errors?.pattern">
+                  Enter a valid email address
+                </div>
+              </div>
+            </div>
+            <div class="col-12 form-group">
+              <label for="inputMessage" class="form-label"
+                >What can we help you with?
+                <span
+                  style="
+                    color: red;
+                    font-size: 30px;
+                    line-height: 17px;
+                    margin-top: 5px;
+                  "
+                  >*</span
+                ></label
+              >
+              <textarea
+                type="text"
+                class="form-control"
+                id="inputMessage"
+                rows="3"
+                formControlName="message"
+              ></textarea>
+              <div
+                class="invalid-feedback"
+                *ngIf="contactForm.get('message')?.touched || isFormSubmit"
+              >
+                <div *ngIf="contactForm.get('message')?.errors?.required">
+                  Description is required
+                </div>
+              </div>
+            </div>
+            <div class="col-12 send-button">
+              <button class="send-btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

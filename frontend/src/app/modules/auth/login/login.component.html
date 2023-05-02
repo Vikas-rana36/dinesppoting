@@ -1,0 +1,106 @@
+<div class="login signup">
+   <div class="contentbox">
+         <div class="login-text bottom" >
+            <p>Not registered yet?  <a [routerLink]="['/auth/signup']">Create an Account</a></p>
+         </div>
+         <div class="login-form">  
+            <a [routerLink]="['/home']"><img src="assets/img/logo.svg" class="logo_img" alt=""></a>   
+            <h2>Welcome Back </h2>
+            <p>Please enter the following credentials!</p>
+            <form class="row g-3" [formGroup]="loginForm" (ngSubmit)="submit()">
+               <div class="col-md-12  col-12 form-group">
+                  <label for="inputEmail4" class="form-label">Email Address <span style="color:red;font-size: 30px;line-height: 17px;margin-top: 5px;">*</span></label>
+                  <div class="position-relative">
+                     <input type="email" class="form-control" id="inputEmail4"  placeholder="dinespotting@email.com"  formControlName="email">
+                     <img src="assets/img/check.svg" *ngIf="this.loginForm.get('email').valid && !(loginForm.controls.email.errors?.email || loginForm.controls.email.errors?.pattern)" class="eye-icon button " alt="">
+                  </div>
+                  <div class="invalid-feedback" *ngIf="isLoginFormSubmitted || this.loginForm.get('email').touched">
+                     <div *ngIf="this.loginForm.get('email').errors?.required">Email is required</div>
+                     <div *ngIf="loginForm.controls.email.errors?.email || loginForm.controls.email.errors?.pattern">Email must be a valid email address.</div>
+                  </div>
+               </div>  
+               <div class="col-md-12 form-group">
+                  <label for="inputPassword4" class="form-label">Password <span style="color:red;font-size: 30px;line-height: 17px;margin-top: 5px;">*</span></label>
+                  <div class="position-relative">
+                     <input type="password" class="form-control" id="inputPassword4" placeholder="********" formControlName="password">
+                     <img src="assets/img/hide.svg" class="eye-icon button" *ngIf="!this.fieldtext" (click)="toggleField('inputPassword4')" alt="">
+                     <img src="assets/img/show.svg" class="eye-icon button" *ngIf="this.fieldtext"  alt="" (click)="toggleField('inputPassword4')">
+                  </div>
+                  <div class="invalid-feedback" *ngIf="loginForm.controls.password.touched || isLoginFormSubmitted">
+                     <app-form-validators-errors minLength=8 maxLength=50 errorPrefix="Password " [errors]="loginForm.get('password').errors"></app-form-validators-errors>
+                  </div>
+               </div>
+               <div class="col-md-12 ">
+                  <div class="form-check">
+                     <div class="form-checkbox">
+                        <input class="form-check-input" [checked]="this.checkBox" (change)="onCheckboxChange($event)"  formControlName = "remember" type="checkbox" id="flexCheckChecked">
+                        <label class="form-check-label"  for="flexCheckChecked" >Remember me</label>
+                        <div class="invalid-feedback" *ngIf="loginForm.controls.remember.touched || isLoginFormSubmitted">
+                           <app-form-validators-errors errorPrefix="Remember " [errors]="loginForm.get('remember').errors"></app-form-validators-errors>
+                        </div>
+                     </div>
+                     <div class="forget">
+                        <a [routerLink]="['/auth/forgot-password']" type="btn">Forgot Password?</a>
+                     </div>
+                  </div>
+                  <button type="button" class="btn btn-red w-100" type="submit" [disabled]="loginForm.invalid">LOGIN</button>     
+                  <div class="or"></div>
+                  <!-- <button class="btn btn-social-icon btn-google"> -->
+                     <!-- <span class="fa fa-google"></span> -->
+                  <!-- </button> -->
+
+                     <a class="btn btn-grey w-100" role="button" #loginRef>
+                        <img src="assets/img/google.svg" alt="">CONTINUE WITH GOOGLE</a>  
+                  <!-- <button class="btn btn-social-icon btn-google" (click)="signInWithGoogle()">
+                     <!-- <span class="fa fa-google"></span> 
+                  </button> -->
+                  <!-- <asl-google-signin-button type="standard" size="large"> </asl-google-signin-button>
+                     <a class="btn btn-grey w-100" role="button" (click)="signInWithGoogle()">
+                        <img src="assets/img/google.svg" alt="">CONTINUE WITH GOOGLE</a>  
+                     -->
+
+                     <!-- <div id="g_id_onload"
+                     data-client_id="1083507110310-3vj716lthv3bhbihg4en5o6jtbp8ksui.apps.googleusercontent.com"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-login_uri="https://dinespotting.trigma.in/auth/login"
+                     data-auto_prompt="false">
+                </div>
+                
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="outline"
+                     data-text="signin_with"
+                     data-size="large"
+                     data-locale="en-US"
+                     data-logo_alignment="left">
+                </div> -->
+
+                <!-- <div  class="btn btn-social-icon btn-google" id="g_id_onload" 
+                data-client_id="1083507110310-3vj716lthv3bhbihg4en5o6jtbp8ksui.apps.googleusercontent.com"
+                data-context="signin"
+                data-ux_mode="popup"
+                data-callback="handleCredentialResponse"
+                data-auto_prompt="false">
+           </div>
+           
+           <div class="g_id_signin"
+                data-type="standard"
+                data-shape="pill"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="left">
+           </div> -->
+          
+               </div>
+            </form>
+         </div>
+      </div>
+      
+      <div class="login-img">
+         <img src="assets/img/login-img.png" alt="">
+      </div>
+
+</div>

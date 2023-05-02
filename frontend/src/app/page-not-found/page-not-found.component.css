@@ -1,0 +1,28 @@
+.page-not-found img {
+  width: 300px;
+}
+.thanks-wrap {
+  text-align: center;
+  padding: 138px 0;
+}
+.thanks-wrap a {
+  text-decoration: none;
+}
+.thanks-wrap h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+.thanks-wrap p {
+  margin-bottom: 30px;
+}
+a.header-btn {
+  border-radius: 5px;
+  padding: 15px 33px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #ff5858;
+}

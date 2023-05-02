@@ -1,0 +1,22 @@
+agm-map   {
+    height: 100%;
+  }
+  .star {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    color: #d3d3d3;
+    }
+    .full {
+     color: #ff5858;
+     font-size: 18px;
+     font-weight: 500;
+    }
+    .half {
+    position: absolute;
+    display: inline-block;
+     overflow: hidden;
+     color: #ff5858;
+     font-size: 18px;
+     font-weight: 500;
+    }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22.24" height="22.24" viewBox="0 0 22.24 22.24">
+  <g id="Page-1" transform="translate(0.414 0.414)">
+    <g id="Artboard" transform="translate(1 1)">
+      <g id="eye-off">
+        <path id="Shape" d="M14.947,15.3a8.885,8.885,0,0,1-5.241,1.818C3.529,17.117,0,10.059,0,10.059A16.279,16.279,0,0,1,4.465,4.818M7.853,3.212A8.047,8.047,0,0,1,9.706,3c6.176,0,9.706,7.059,9.706,7.059a16.323,16.323,0,0,1-1.906,2.815m-5.929-.944A2.647,2.647,0,1,1,7.835,8.188" transform="translate(0 -0.353)" fill="none" stroke="#8c87a6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+        <path id="Shape-2" data-name="Shape" d="M0,0,19.411,19.411" fill="none" stroke="#8c87a6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+.h-100vh{
+    height: 100vh;
+}
+.thankyou-wrap{
+    padding: 20px;
+   
+}
+.thankyou-wrap h1{
+color: #ff5858;
+margin-bottom: 10px;
+font-weight: 700;
+}
+.btn-primary {
+    background-color: #ff5858;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #FF5858;
+    border-radius: 30px;
+    outline: none;
+    text-decoration: none;
+ margin-top: 15px;
+ padding: 10px 30px;
+}

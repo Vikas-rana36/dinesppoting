@@ -1,0 +1,349 @@
+<section class="delivery">
+   <div class="main">
+      <div class="banner-form search-page">
+         <!-- <form class="row g-3">
+            <div class="col-lg-5 col-md-5">
+               <label for="inputEmail4" class="form-label">What are you looking for?</label>
+               <ng-select [multiple]="true" [maxSelectedItems]="2" [(ngModel)]="selectedCategory" name="category" class="form-control" placeholder="Tacos, Cheap Dinner, Max's" (change)="onChangCategory($event)" >
+               <ng-option *ngFor="let cat of categoryList" [value]="cat.alias">{{cat.title}}</ng-option>
+               </ng-select>
+               <span style="font-style: italic;">(Max 2 category selection)</span>
+            </div>
+            <div class="col-lg-5 col-md-5">
+               <label for="inputPassword4" class="form-label">Location</label>
+               <input [(ngModel)]="formatted_address" name="location" ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" type="text" class="form-control cst-right" id="inputPassword4" placeholder="San Francisco, CA">                  
+               <img src="assets/img/location-1.svg" class="location-icon button " alt="">
+            </div>
+            <div class="col-lg-2 col-md-2 home-search-banner">
+               <a type="button" class=" btn-primary" (click)="searchRestaurants()"> SEARCH</a>
+            </div>
+            </form> -->
+         <form class="row g-3 " [formGroup]="searchForm" (ngSubmit)="searchRestaurants()">
+         <div class="col-lg-5 col-md-5">
+            <label for="inputEmail4" class="form-label">What are you looking for?</label>
+            <ng-select [addTag]="customRestaurantsCategory" [multiple]="true" [maxSelectedItems]="1" class="form-control" placeholder="Tacos, Cheap Dinner, Max's" (search)="searchCategory($event)" (change)="onChangeRestaurant($event)" formControlName="category" [(ngModel)]="selectedRestaurant">
+               <ng-option *ngFor="let cat of search" [value]="cat.text">{{cat.text}}</ng-option>
+            </ng-select>
+            <!-- <span style="font-style: italic;">(Max 2 category selection)</span> -->
+         </div>
+
+         <div class="col-lg-5 col-md-5">
+            <label for="inputPassword4" class="form-label">Location</label>
+            <input [(ngModel)]="formatted_address" formControlName="location" ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" type="text" class="form-control cst-right" id="inputPassword4" placeholder="San Francisco, CA">                  
+            <img src="assets/img/location-1.svg" class="location-icon button " alt="">
+            <div class="invalid-feedback-search" *ngIf="searchForm.controls.location.touched || isSearchFormSubmitted">
+            <div *ngIf="searchForm.controls.location.errors?.required" class="text-danger" >Location is required</div>
+            </div>
+         </div>
+         <div class="col-lg-2 col-md-2 home-search-banner">
+            <button type="submit" class=" btn-primary"> SEARCH</button>
+         </div>
+         </form>
+      </div>
+   </div>
+</section>
+<section class="delivery-wrapper">
+   <div class="spinnerContainer">
+      <!-- breadcrumb start -->
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#" class="item-list">Restaurants</a></li>
+            <li class="breadcrumb-item"><a href="#" class="item-list">Search</a></li>
+         </ol>
+      </nav>
+      <!-- breadcrumb end-->
+      <!-- main-content start -->
+      <div class="main-content">
+         <div class="row">
+            <div class="main-content-box">
+               <!-- sidebar start -->
+               <div class="row">
+                  <div class="col-md-3 col-lg-3 d-view side-scroll-main" [ngClass]="{'d-view': toggle, 'filter-open': !toggle}">
+                     <div class="sidebar-left">
+                        <i class="fa fa-times" aria-hidden="true" (click)="toggleClassForFilter()"></i>
+                        <div class="side-scroll">
+                           <div class="cmn-wrap filter-wrap">
+                              <div class="title-wrap">
+                                 <p class="title-txt">Filter</p>
+                                 <a (click)="clearAllFilters()" class="clr-txt">Clear All</a>
+                              </div>
+                              <p class="txt-style-1">Price</p>
+                              <ul class="pricing-tab">
+                                 <li>
+                                    <a (click)="priceFilter(1)" [ngClass]="{'active': selectedPrice.includes(1)}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Inexpensive">$</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="priceFilter(2)" [ngClass]="{'active': selectedPrice.includes(2)}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Moderate">$$</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="priceFilter(3)" [ngClass]="{'active': selectedPrice.includes(3)}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pricey">$$$</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="priceFilter(4)" [ngClass]="{'active': selectedPrice.includes(4)}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ultra High-End">$$$$</a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="cmn-wrap filter-wrap">
+                              <p class="txt-style-1">Distance (in Mi.)</p>
+                              <ul class="pricing-tab">
+                                 <li>
+                                    <a (click)="radiusFilter(25)" [ngClass]="{'active': radiusTab==='radius25'}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="25 Miles">25</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="radiusFilter(20)" [ngClass]="{'active': radiusTab==='radius20'}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="20 Miles">20</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="radiusFilter(15)" [ngClass]="{'active': radiusTab==='radius15'}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="15 Miles">15</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="radiusFilter(10)" [ngClass]="{'active': radiusTab==='radius10'}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="10 Miles">10</a>
+                                 </li>
+                                 <li>
+                                    <a (click)="radiusFilter(5)" [ngClass]="{'active': radiusTab==='radius5'}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="5 Miles">5</a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="cmn-wrap filter-wrap">
+                              <div class="title-wrap">
+                                 <p class="title-txt">Suggested</p>
+                              </div>
+                              <ul class="checked-tab">
+                                 <li>
+                                    <div class="d-flex align-items-center">
+                                       <div class="form-group cst-radio">
+                                          <input type="radio" (change)="suggestedFilter('')" [checked]="open_now == 'both' ? true : false" id="both" name="is_open">
+                                          <label for="both" class="check-label">Both</label>
+                                       </div>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="d-flex align-items-center">
+                                       <div class="form-group cst-radio">
+                                          <input type="radio" (change)="suggestedFilter('true')" [checked]="open_now == 'true' ? true : false" id="open_now" name="is_open">
+                                          <label for="open_now" class="check-label">Open Now</label>
+                                       </div>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="d-flex align-items-center">
+                                       <div class="form-group cst-radio">
+                                          <input type="radio" (change)="suggestedFilter('false')" [checked]="open_now == 'false' ? true : false" id="closed_now" name="is_open">
+                                          <label for="closed_now" class="check-label">Closed Now</label>
+                                       </div>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="cmn-wrap filter-wrap category-filter">
+                              <!-- <div class="title-wrap">
+                                 <div class="">
+                                    <p class="title-txt">Category</p>
+                                    <span class="category-title" style="font-style: italic;">(Max 2 category selection)</span>
+                                    <div class="selected-wrap">
+                                       <span class="selected-category" *ngFor="let categoryName of selectedCategoryLable"><span class="close-selected" (click)="categoryFilter(categoryName,'')">x</span>{{categoryName}} </span>
+                                    </div>
+                                 </div>
+                                 <a href="javascript:void(0);" class="clr-txt" data-bs-toggle="modal" data-bs-target="#exampleModal">See All</a>
+                              </div>
+                              <ul class="category-tab" >
+                                 <li *ngFor="let category of max10Categories">
+                                    <div class="checkbox-btn">
+                                       <input [disabled]="disableCategoryCheckbox(category.alias)" (click)="categoryFilter(category.alias,category.title)" [value]="category.alias" type="checkbox" [checked]="checkIfCategoryExist(category.alias)">
+                                       <span [ngClass]="" class="category-btn">{{category.title}}</span>
+                                    </div>
+                                 </li>
+                              </ul> -->
+
+
+                              <div class="title-wrap">
+                                 <div class="">
+                                    <p class="title-txt">Category</p>
+                                    <span class="category-title" style="font-style: italic;">(Max 2 category selection)</span>
+                                    <div class="selected-wrap">
+                                       <span class="selected-category" *ngFor="let category of selectedCategoryLable">{{category.title}}<span class="close-selected" (click)="categoryFilter(category)"> x</span></span>
+                                    </div>
+                                 </div>
+                                 <a href="javascript:void(0);" class="clr-txt" data-bs-toggle="modal" data-bs-target="#exampleModal">See All</a>
+                              </div>
+                              <ul class="category-tab" >
+                                 <li *ngFor="let category of max10Categories">
+                                    <div class="checkbox-btn">
+                                       <input [disabled]="disableCategoryCheckbox(category.alias)" (click)="categoryFilter(category)" [value]="category.alias" type="checkbox" [checked]="checkIfCategoryExist(category.alias)">
+                                       <span [ngClass]="" class="category-btn">{{category.title}}</span>
+                                    </div>
+                                 </li>
+                              </ul>
+
+
+
+
+
+
+                              
+                           </div>
+                        </div>
+                        <div class="side-bottom-main">
+                           <div class="side-bottom-btns">
+                              <button (click)="clearAllFilters()" class="side-cancel-btn">Cancel</button>
+                              <button (click)="getRestaurants()" class="side-apply-btn">Apply filters</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- sidebar end -->
+                  <!-- Top-Restaurants start -->
+                  <div class=" col-xl-6 col-lg-8 col-md-8 col-12">
+                     <div class="top-restaurant">
+                        <!-- header start -->
+                        <div class="header-bar">
+                           <h2><i class="fa fa-sliders" (click)="toggleClassForFilter()" aria-hidden="true"></i> Top Rated Restaurants</h2>
+                           <div class="dropdown">
+                              Sort:
+                              <button class="btn-select ">
+                                 <select (change)="sortBy(sort_by.value)" name="sort_by" #sort_by>
+                                    <option value="best_match">Recommended</option>
+                                 <option value="review_count">Most Reviewed</option>
+                                 <option value="rating">Highest Rated</option>
+                                 <option value="distance">Distance</option>
+                                 </select>
+                              </button>
+                           </div>
+                        </div>
+                        <div *ngIf="totalRestaurants==0" class="no-result-main">No result found</div>
+                        <div (click)="details(data.id)" class="card-wrapper" id={{data.id}} *ngFor="let data of restaurantData | paginate: { itemsPerPage: limit, currentPage: offset,totalItems:totalCount}">
+                           <div class="row">
+                              <div class="col-lg-4 col-md-6 col-sm-12">
+                                 <div class="card-wrapper-body">
+                                    <div class="card-body-img">
+                                       <div class="wrapper-img">
+                                          <img src="{{data.image_url||'assets/img/dummy_restaurant.png'}}" alt="">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-8 col-md-6 col-sm-12">
+                                 <div class="card-top">
+                                    <div class="wrapper-left">
+                                       <div class="card-heading">
+                                          <h3>{{data.name}}</h3>
+                                          <p>{{data.location.address1}}, {{data.location.city}}</p>
+                                       </div>
+                                       <button (click)="details(data.id)" type="button" class="btn-primary"><img src="assets/img/distance.png" alt=""> {{data.distance/1609.34 | number : '1.2-2'}} Mi.</button>
+                                    </div>
+                                    <div class="wrapper-right buttons-category">
+                                       <div class="present-left">
+                                          <div class="presentation" *ngFor="let category of data.categories">
+                                             <div class="presentation-look dark">{{category.title}}</div> 
+                                          </div>
+                                       </div>
+                                       <span title="{{data.priceTitle}}">{{data.price}}</span>
+                                    </div>
+                                 </div>
+                                
+                                 <!-- card-bottom start -->
+                                 <div class="card-wrapper-bottom">
+                                    <div class="rating-wrapper">
+                                       <div class="rating-box">
+                                          <div class="red-box-1">
+                                             <img src="assets/img/red-icon.svg" alt="">
+                                          </div>
+                                          <div class="red-box">
+                                             <ngb-rating class="rating" [starTemplate]="ratings" [(rate)]="data.rating" [max]="5" [readonly]="true"></ngb-rating>
+                                             <p>{{data.review_count}} <span>Reviews</span></p>
+                                          </div>
+                                       </div>
+                                       <div class="rating-box">
+                                          <div class="red-box-1">
+                                             <img src="assets/img/google-icon.svg" alt="">
+                                          </div>
+                                          <div class="red-box">
+                                             <ngb-rating class="rating" [starTemplate]="ratings" [(rate)]="data.google_rating" [max]="5" [readonly]="true"></ngb-rating>
+                                             <p>{{data.google_review_count}} <span>Reviews</span></p>
+                                          </div>
+                                       </div>
+                                       <div class="rating-box">
+                                          <div class="red-box-1">
+                                             <img class="icon-img" src="assets/img/tripadvisor-logo.png" alt="">
+                                          </div>
+                                          <div class="red-box">
+                                             <ngb-rating class="rating" [starTemplate]="ratings" [(rate)]="data.trip_advisor_rating" [max]="5" [readonly]="true"></ngb-rating>
+                                             <p>{{data?.trip_advisor_review_count}} <span>Reviews</span></p>
+                                          </div>
+                                       </div>
+                                       <div class="rating-box review-count rating-number">
+                                          <div class="overall-blankspace">
+                                          </div>
+                                          <div class="">
+                                             <div class="red-box">
+                                                <ngb-rating class="rating" [starTemplate]="ratings"  [(rate)]="data.averageRating" [max]="5" [readonly]="true"></ngb-rating>
+                                             </div>
+                                             <div class="red-box-1 pr-0 ">
+                                                <span>Overall Rating</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- card-bottom end -->
+                              </div>
+                           </div>
+                        </div>
+                        <pagination-controls class="pagination-list" *ngIf="totalRestaurants>0"(pageChange)="pageChangeEvent($event)"></pagination-controls>
+                     </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-xl-3 col-12 detail-map-main">
+                     <div class="detail-map detail-maps-right">
+                        <agm-map [latitude]="mapLat" [longitude]="mapLong" [zoom]="zoom"[disableDefaultUI]="false">
+                        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.long" (markerClick)="scrollToSpecificLocation(m.id,infoWindow)">
+                           <agm-info-window #infoWindow>
+                              <strong><b>Name : </b>{{m.name}}</strong><br/>
+                              <strong><b>Closed Now : </b>{{m.is_closed?'Yes':'No'}}</strong><br/>
+                              <strong><b>Phone : </b>{{m.phone}}</strong><br/>
+                           </agm-info-window>
+                        </agm-marker>                       
+                     </agm-map>
+                     </div>
+                  </div>
+               </div>
+               <!-- Top-Restaurants end -->
+               <!-- map start -->
+            </div>
+            <!-- map end -->
+         </div>
+      </div>
+       <!-- main-content end -->
+   </div>
+</section>
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+   <div class="modal-content">
+      <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">More Categories</h5>
+         <span style="font-style: italic;">(Max 2 category selection)</span>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="col-12">
+         <div class="row">
+         <div class="col-md-6 col-sm-12" *ngFor="let category of categoryList">
+            <div class="form-check">
+               <input class="form-check-input" [disabled]="disableCategoryCheckbox(category.alias)" (click)="categoryFilter(category)" type="checkbox" [value]="category.alias" [checked]="checkIfCategoryExist(category.alias)" id="flexCheckDefault">
+               <label class="form-check-label" for="flexCheckDefault">
+               {{category.title}}
+               </label>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div>
+      <div class="modal-footer justify-content-end">
+         <button type="button" (click)="getRestaurants()" data-bs-dismiss="modal" class="add-button">Apply</button>
+      </div>
+   </div>
+   </div>
+</div>
+<ng-template #ratings let-fill="fill">
+   <span class="star" [class.full]="fill === 100">
+     <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+   </span>
+ </ng-template>

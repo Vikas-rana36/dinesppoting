@@ -1,0 +1,14 @@
+.text-end {
+    justify-content: space-between;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.btn-primary {
+    background: #FF5858!important;
+    border-color: #ff5858;
+    padding: 8px 36px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}

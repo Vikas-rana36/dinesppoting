@@ -1,0 +1,90 @@
+
+
+ <div class="login">
+   <div class="contentbox">
+      <div class="login-text">
+         <p>Already have an account? <a [routerLink]="['/auth/login']">Login</a></p>
+      </div>
+      <div class="login-form">
+         <a href="#"><img src="assets/img/logo.svg" class="logo_img" alt=""></a>   
+         <h2>Create Account   </h2>
+         <p>Please enter the following credentials!</p>
+         <form class="row g-3" [formGroup]="signupForm">
+            <div class="col-md-6 col-lg-6 col-12 form-group">
+               <label for="inputFname4" class="form-label">First Name*</label>
+               <input type="text" class="form-control" id="inputFname4" placeholder="John" formControlName="first_name">
+               <!-- <div class="invalid-feedback" *ngIf="isSignupFormSubmitted || this.signupForm.get('first_name').touched">
+                  <div *ngIf="this.signupForm.get('first_name').errors.required">First Name is required</div>
+
+               </div> -->
+               <!-- <p class="invalid-feedback" *ngIf="isSignupFormSubmitted">
+                  <app-form-validators-errors errorPrefix="First Name " [errors]="signupForm.get('first_name').errors"></app-form-validators-errors>
+                </p> -->
+                <div class="invalid-feedback"  *ngIf="f['first_name'].touched || isSignupFormSubmitted">
+                  <app-form-validators-errors *ngIf="f['first_name'].invalid " errorPrefix="First Name " patternError="Enter alphabates only." minLength=5 maxLength=100  [errors]="f['first_name'].errors || []"></app-form-validators-errors>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-12 form-group">
+               <label for="inputLname4" class="form-label">Last Name*</label>
+               <input type="text" class="form-control" id="inputLname4" placeholder="Deo" formControlName="last_name">
+               <!-- <div class="invalid-feedback" *ngIf="isSignupFormSubmitted || this.signupForm.get('last_name').touched">
+                  <div *ngIf="this.signupForm.get('last_name').errors?.required">Last Name is required</div>
+
+               </div> -->
+               <div class="invalid-feedback"  *ngIf="f['last_name'].touched || isSignupFormSubmitted">
+                  <app-form-validators-errors errorPrefix="Last Name " patternError="Enter alphabates only." minLength=5 maxLength=100  [errors]="f['last_name'].errors || []"></app-form-validators-errors>
+              </div>
+            </div>
+            <div class="col-md-12  col-12 form-group">
+               <label for="inputEmail4" class="form-label">Email Address*</label>
+               <input type="email" class="form-control" id="inputEmail4" placeholder="dinespotting@email.com" formControlName="email">
+               <div class="invalid-feedback" *ngIf="isSignupFormSubmitted || this.signupForm.get('email').touched">
+                  <div *ngIf="this.signupForm.get('email').errors?.required">Email is required</div>
+                  <div *ngIf="signupForm.controls.email.errors?.email || signupForm.controls.email.errors?.pattern">Email must be a valid email address.</div>
+               </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-12 form-group">
+               <label for="inputPassword4" class="form-label">New Password*</label>
+               <div class="position-relative">
+                  <input type="password" class="form-control" id="inputPassword4" placeholder="********"  formControlName="password">
+                  
+                  <img src="assets/img/hide.svg" class="eye-icon button" *ngIf="!this.fieldText" (click)="toggleFieldText('inputPassword4')" alt="">
+                  <img src="assets/img/show.svg" class="eye-icon button" *ngIf="this.fieldText" alt="" (click)="toggleFieldText('inputPassword4')">
+               </div>
+               <!-- <div class="invalid-feedback" *ngIf="isSignupFormSubmitted || this.signupForm.get('password').touched">
+                  <div *ngIf="this.signupForm.get('password').errors?.required">Password is required</div>
+
+               </div> -->
+               <div class="invalid-feedback" *ngIf="signupForm.controls.password.touched || isSignupFormSubmitted">
+                  <app-form-validators-errors minLength=8 maxLength=50 errorPrefix="Password " [errors]="signupForm.get('password').errors"></app-form-validators-errors>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-12 form-group">
+               <label for="inputPassword4" class="form-label">Confirm Password*</label>
+               <div class="position-relative">
+                  <input type="password" class="form-control" id="inputPassword" placeholder="********" formControlName="confirm_password">
+                  <img src="assets/img/hide.svg" class="eye-icon button" *ngIf="!this.fieldtext" (click)="toggleField('inputPassword')" alt="">
+                  <img src="assets/img/show.svg" class="eye-icon button" *ngIf="this.fieldtext"  alt="" (click)="toggleField('inputPassword')">
+               </div>
+               <!-- <div class="invalid-feedback" *ngIf="isSignupFormSubmitted || this.signupForm.get('confirm_password').touched">
+                  <div *ngIf="this.signupForm.get('confirm_password').errors?.required">Confirm password is required</div>
+
+               </div> -->
+               <div class="invalid-feedback" *ngIf="signupForm.controls.confirm_password.touched || isSignupFormSubmitted">
+                  <div *ngIf="signupForm.controls.confirm_password.errors?.required" class="text-danger" >Confirm password is required</div>
+                  <div *ngIf="signupForm.controls.confirm_password.errors?.mustMatch" class="text-danger" >Passwords must match</div>
+                </div>
+            </div>
+            <!-- <div class="form-check">
+               <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+               <label class="form-check-label" for="flexCheckChecked">Remember me</label>
+            </div> -->
+            <a class="btn btn-primary" type="submit" (click)="onSubmit()">Signup</a>                       
+         </form>
+      </div>
+   </div>
+   <!---Right side image-->
+   <div class="login-img">
+      <img src="assets/img/login-img.png" alt="">
+   </div>
+ </div>

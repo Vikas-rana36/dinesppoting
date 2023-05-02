@@ -1,0 +1,278 @@
+<div class="detail-page">
+   <!-- details-banner start -->
+<!-- <section class="delivery details">
+  
+   <div class="main">
+      <div class="banner-form">
+         <form class="row g-3 ">
+            <div class="col-lg-5 col-md-5">
+               <label for="inputEmail4" class="form-label">What are you looking for?</label>
+               <input type="text" class="form-control" id="inputEmail4" placeholder="Tacos, Cheap Dinner, Max's">
+            </div>
+            <div class="col-lg-5 col-md-5">
+               <label for="inputPassword4" class="form-label">Location</label>
+               <input type="text" class="form-control" id="inputPassword4" placeholder="San Francisco, CA">                  
+               <img src="assets/img/location-1.svg" class="location-icon button " alt="">
+            </div>
+            <div class="col-lg-2 col-md-2">
+               <a href="" type="button" class=" btn-primary"> SEARCH</a>
+            </div>
+         </form>
+      </div>
+   </div>
+</section> -->
+<!-- details-banner end -->
+<!-- details-gallery start -->
+<section class="details-gallery" *ngIf="detail">
+  <div class="img-container-grid" [ngClass]="{'grid-1': photosLength === 1, 'grid-2' : photosLength === 2, 'grid-3' : photosLength === 3 , 'grid-4' : photosLength === 4 }">
+     <div class="big-square">
+        <img src="{{detail.image_url}}" alt="">
+     </div>
+     <div class="bigsquare_blank">
+        <div class="inner_square" *ngFor="let data of detail.photos">
+           <img src="{{data}}" (click)="openImage(detail)" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        </div>
+        <div class="inner_square" *ngIf="photosLength>2"  (click)="openImage(detail)"   data-bs-toggle="modal" data-bs-target="#exampleModal">
+           <img src="assets/img/detail-5.png" alt="">
+           <div class="centered">See {{photosLength}} Photos</div>
+        </div> 
+        <!-- <div class="inner_square">
+           <img src="assets/img/detail-3.png" alt="">
+        </div>
+        <div class="inner_square">
+           <img src="assets/img/detail-4.png" alt="">
+        </div>
+        <div class="inner_square">
+           <img src="assets/img/detail-5.png" alt="">
+           <div class="centered">See 85 Photos</div>
+        </div> -->
+     </div>
+  </div>
+</section>
+<!-- details-gallery end -->
+<!-- Recommended Reviews start -->
+<div class="detail-review" *ngIf="detail">
+   <div class="review-box">
+      <div class="row">
+         <div class="col-lg-8 col-md-8 col-12">
+            <div class="box-heading">
+               <h3>{{detail.name}}</h3>
+               <ul>
+                  <!-- <li><a  class="">
+                     <img src="assets/img/Claimed.svg" alt="Claimed"> <strong style=" font-style: normal;" >Claimed  {{detail.price}}</strong> <span *ngFor="let data of detail.categories">  {{data.title}}  </span> </a>
+                     </li> -->
+                  <li class="box-claimed"><a  class="">
+                     <img src="assets/img/Claimed.svg" alt="Claimed"> <strong style=" font-style: normal;" title="{{priceTitle}}">Claimed  <div class="claimed-doller">{{detail.price}}</div></strong> <span *ngFor="let data of detail.categories">  {{data.title}}  </span>
+                      <!-- <span class="edit">Edit</span> -->
+                     </a>
+                  </li>
+                  <li><a  class=""><img src="assets/img/time.svg" alt="Claimed"> <strong *ngIf="!isClosed" style=" font-style: normal;">Open Now</strong><strong *ngIf="isClosed" style=" font-style: normal;">Closed Now </strong> 
+                    
+                    <!-- <span style="font-family: 'poppins'; font-style: normal;">{{startDate}} {{startPrepand}} - {{endDate}} {{endPrepand}} </span> -->
+                    <div class="table-hover-image">
+                       <img src="assets/img/hour.svg" alt="hour" />
+                     
+                       <table class="table">
+                          <tbody>
+                            <tr *ngFor="let time of hours">
+                              <td>{{this.daylist[time.day]}}</td>
+                              <td ><span>{{time.start | customTime:time.start}} - {{time.end | customTime:time.end}}</span> <span *ngIf="time.hours"> {{time.hours?.start | customTime:time.hours.start}} - {{time.hours?.end | customTime:time.hours.end}} </span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                 </a></li>
+               </ul>
+            </div>
+            <!---rating_box start-->
+        
+             
+            <div class="rating-wrapper">
+               <div class="rating-box">
+                  <div class="red-box-1">
+                     <img src="assets/img/red-icon.svg" alt="">
+                  </div>
+                  <div class="red-box">
+                    <ngb-rating class="rating" [starTemplate]="yelpR" [(rate)]="rating" [max]="5" [readonly]="true"></ngb-rating>
+                     <!-- <img src="assets/img/yellow-star.svg" alt=""> -->
+                     <p>{{detail.review_count}} <span>Reviews</span></p>
+                  </div>
+               </div>
+               <div class="rating-box">
+                  <div class="red-box-1">
+                     <img src="assets/img/google-icon.svg" alt="">
+                  </div>
+                  <div class="red-box">
+                     <!-- <img src="assets/img/yellow-star.svg" alt=""> -->
+                     <ngb-rating class="rating" [starTemplate]="yelpR"  [(rate)]="googleRating" [max]="5" [readonly]="true"></ngb-rating>
+                     <p>{{googleReviewCount}} <span>Reviews</span></p>
+                  </div>
+               </div>
+               <div class="rating-box">
+                  <div class="red-box-1">
+                     <img class="icon-img" src="assets/img/tripadvisor-logo.png" alt="">
+                  </div>
+                  <div class="red-box">
+                     <ngb-rating class="rating" [starTemplate]="yelpR"  [(rate)]="tripAdvisorRating" [max]="5" [readonly]="true"></ngb-rating>
+                     <p>{{tripAdvisorReview}} <span>Reviews</span></p>
+                  </div>
+               </div>
+               <div class="rating-box rating-number">
+                  <div class="overall-blankspace">
+                  </div>
+                  <div class="">
+                     <div class="red-box">
+                        <ngb-rating class="rating" [starTemplate]="yelpR"  [(rate)]="overAllRating" [max]="5" [readonly]="true"></ngb-rating>
+                     </div>
+                     <div class="red-box-1 pr-0 ">
+                        <span>Overall Rating</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         
+            <!---rating_box end-->
+
+            <!-- Recommended Reviews  start-->
+            
+            <div class="review">
+               <h3>Recommended Reviews</h3>
+               <div class="testimonial-box" *ngFor="let data of userReviews | paginate: { itemsPerPage: limit, currentPage: offset,totalItems: totalReviews}">
+                  <div class="testimonial">
+                     <div class="testimonial-header">
+                        <div class="left">
+                           <div class="left testimonial-1">
+                              <img *ngIf="data.user.image_url" src="{{data.user.image_url}}" class="img-fluid " alt="image">
+                              <img *ngIf="!data.user.image_url" src="/assets/img/user.png" class="img-fluid " alt="image">
+
+                              <div class="left-text">
+                                 <h6>{{data.user.name}}</h6>
+                                 <p>{{data.time_created | timeago}}</p>
+                              </div>
+                           </div>
+                           <div class="left right-starts">
+                              <div class="right">
+                                <ngb-rating [(rate)]="data.rating" [max]="5" [readonly]="true"></ngb-rating>
+                         
+                                 <!-- <img src="assets/img/stars.svg" alt="" > -->
+                                 <div class="right-text">    
+                                    <p>{{data.rating}}/5</p>                                          
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- presentation start -->
+                  <!-- <div class="presentation">
+                     <div class="presentation-look">Food Presentation </div>
+                     <div class="presentation-look blue">Delicious Food</div>
+                     <div class="presentation-look dark">Perfect Presentation</div>
+                  </div> -->
+                  <!-- presentation start -->
+                  <!--text start-->
+                  <div class="content-text">
+                     <p>{{data.text}}</p>
+                  </div>
+                  <!--text end-->
+                  <!--comments start-->
+           
+               </div>
+                  <!--comments end-->
+               
+            </div>
+            <div class="pagitaion pagination-list">
+              <pagination-controls *ngIf="this.totalReviews>0" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+            </div>
+         </div>
+         <!-- Recommended Reviews end -->
+         
+      
+      <div class="col-md-4 col-lg-4 col-12 ">
+        <div class="map-main">
+           <div class="map-number"><i class="fa fa-phone" aria-hidden="true"></i>{{detail.phone}}</div>
+           <div class="map-direction">Location</div>
+           <div class="detail-map">
+            
+              <agm-map #agmMap  [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+              >
+                 <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
+              </agm-map>
+           </div>
+           <div class="map-address">{{detail.location.address1}},{{detail.location.city}}</div>
+           <div class="Restaurant-detal-lst">
+               <div class="table-hover-image">               
+                  <table class="table">
+                     <tbody>
+                     <tr *ngFor="let time of hours">
+                        <td>{{this.daylist[time.day]}}</td>
+                        <td ><span>{{time.start | customTime:time.start}} - {{time.end | customTime:time.end}}</span> <span *ngIf="time.hours"> {{time.hours?.start | customTime:time.hours.start}} - {{time.hours?.end | customTime:time.hours.end}} </span></td>
+                     </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <button target="_blank" class="btn-direction" (click)="openMap()">
+                  <img src="../../../../assets/img/direction.svg" alt="">Restaurant location</button>
+            </div>
+            
+        </div>
+        <div class="time-table">
+         <table class="table">
+            <tbody>
+            <tr *ngFor="let time of hours">
+               <td>{{this.daylist[time.day]}}</td>
+               <td ><span>{{time.start | customTime:time.start}} - {{time.end | customTime:time.end}}</span> <span *ngIf="time.hours"> {{time.hours?.start | customTime:time.hours.start}} - {{time.hours?.end | customTime:time.hours.end}} </span></td>
+            </tr>
+         </tbody>
+         </table>
+      </div>
+      </div>
+   </div>
+   </div>
+</div>
+<!-- Recommended Reviews end -->
+</div>
+
+  <div class="modal fade product-modal"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"   [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-content">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ngx-slick-carousel class="carousel" 
+        #slickModal="slick-carousel"        
+        [config]="slideConfigration">
+        <div ngxSlickItem *ngFor="let data of openedImage.photos" class="slide" >
+        <img src="{{data}}" alt=""  width="100%">
+        </div>
+     </ngx-slick-carousel>
+
+<!--          
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+           <div class="carousel-inner" *ngFor="let photo of openedImage">
+             <div class="carousel-item active">
+               <img class="d-block w-100" src={{photo}} alt="First slide">
+             </div>
+             
+           </div>
+           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+             <span class="sr-only">Previous</span>
+           </a>
+           <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+             <span class="sr-only">Next</span>
+           </a>
+         </div>
+     -->
+      </div>
+     
+    </div>
+  </div>
+</div>
+<ng-template #yelpR let-fill="fill">
+   <span class="star" [class.full]="fill === 100">
+     <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+   </span>
+ </ng-template>

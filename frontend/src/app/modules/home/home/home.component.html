@@ -1,0 +1,203 @@
+<!----banner start-->
+
+<section class="banner container-fluid">
+    <!-- <div class="banner-img">
+        <img src="assets/img/banner-image.png" alt="">
+    </div> -->
+    <div class="main">  
+        <div class="home-banner">
+            <div class="banner-text">
+            <!-- <h1>Discover fresh restaurants and cafes near you</h1> 
+            <p>Spot high-end restaurants and cozy lucky-finds offering extensive menus and incredible palettes. Order your next meal from your favourite restaurants or explore millions of photos and reviews from the ones you haven't tried yet.</p>
+            <a type="button" class=" btn-primary" (click)="goToRestaurant()"> <img src="assets/img/search.svg" alt=""> Restaurant</a> -->
+                <h2>Find the best <span>Restaurants</span> Easily</h2>
+                <p>All the Restaurant Ratings in one place</p>
+            </div>
+            <div class="banner-mob">
+                <img src="assets/img/banner-mob.png" alt="">
+            </div>
+        </div>
+        <div class="banner-form">
+            <form class="row g-3 " [formGroup]="searchForm" (ngSubmit)="searchRestaurants()">
+                <div class="col-lg-5 col-md-5">
+                  <label for="inputEmail4" class="form-label">What are you looking for?</label>
+                  <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Tacos, Cheap Dinner, Max's"> -->
+                  <ng-select [addTag]="customRestaurantsFood"  [multiple]="true" [maxSelectedItems]="1" class="form-control" placeholder="Tacos, Cheap Dinner, Max's"(search)="searchCategory($event)"
+                  (change)="onChangCategory($event)" formControlName="category">
+                    <ng-option *ngFor="let cat of search" [value]="cat.text">{{cat.text}}</ng-option>
+                 </ng-select>
+                 <!-- <ng-select 
+                 [items]="search"
+                 bindLabel="text"
+                 class="form-control"
+                 [maxSelectedItems]="2"
+                   placeholder="Tacos, Cheap Dinner, Max's"
+                   (search)="searchCategory($event)"
+                   (change)="onChangCategory($event)"
+                   formControlName="category" 
+                   > 
+        </ng-select>-->
+                 <!-- <span style="font-style: italic; color:#fff">(Max 2 category selection)</span> -->
+                </div>
+                <div class="col-lg-5 col-md-5">
+                  <label for="inputPassword4" class="form-label">Location</label>
+                  <input ngx-google-places-autocomplete  name="location" #placesRef="ngx-places" [(ngModel)]="selectedAddress" (onAddressChange)="handleAddressChange($event)" [(ngModel)]="selectedAddress" type="text" class="form-control cst-right" id="inputPassword4" formControlName="location">                  
+                  <img src="assets/img/location-white.svg" class="location-icon button " alt="">
+                  <div class="invalid-feedback-search" *ngIf="searchForm.controls.location.touched || isSearchFormSubmitted">
+                    <div *ngIf="searchForm.controls.location.errors?.required" class="text-danger" >Location is required</div>
+                    </div>
+                  <!-- <div class="invalid-feedback" *ngIf="searchForm.controls.location.touched">
+                    <app-form-validators-errors errorPrefix="Location " [errors]="loginForm.get('location').errors"></app-form-validators-errors>
+                 </div> -->
+                </div>
+                <div class="col-lg-2 col-md-2 home-search-banner">
+                    <button type="submit" class=" btn-primary"> SEARCH</button>
+                </div>
+            </form>
+        </div>
+        <!-- <div class="banner-review">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="review-back">
+                        <div class="review-img">
+                            <img src="assets/img/google-icon.svg" alt="">
+                        </div>
+                        <div class="">
+                            <h3>Google</h3>
+                            <h5>13199 Reviews</h5>
+                            <div class="d-flex card-right align-items-center">
+                                <ngb-rating [rate]="4.5" [max]="5" [readonly]="true"></ngb-rating>
+                                <p class="rating-text">4.8/5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="review-back">
+                        <div class="review-img">
+                            <img src="assets/img/openTable-icon.svg" alt="">
+                            <!-- <img src="assets/img/google-icon.svg" alt="">
+                        </div>
+                        <div class="">
+                            <h3>OpenTable</h3>
+                            <h5>1299 Reviews</h5>
+                            <div class="d-flex card-right align-items-center">
+                                <ngb-rating [rate]="4" [max]="5" [readonly]="true"></ngb-rating>
+                                <p class="rating-text">4.8/5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="review-back">
+                        <div class="review-img">
+                            <img src="assets/img/facebook-icon.svg" alt="">
+                        </div>
+                        <div class="">
+                            <h3>Facebook</h3>
+                            <h5>1309 Reviews</h5>
+                            <div class="d-flex card-right align-items-center">
+                                <ngb-rating [rate]="3"  [max]="5" [readonly]="true"></ngb-rating>
+                                <p class="rating-text">4.8/5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="review-back">
+                        <div class="review-img">
+                            <img src="assets/img/red-icon.svg" alt="">
+                        </div>
+                        <div class="">
+                            <h3>Yelp</h3>
+                            <h5>1469 Reviews</h5>
+                            <div class="d-flex card-right align-items-center">
+                                <ngb-rating [rate]="5"  [max]="5" [readonly]="true"></ngb-rating>
+                                <p class="rating-text">4.8/5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</section>
+<!----banner end-->
+
+<!----Popular Restaurants start-->
+
+<section class="restaurant-box container-fluid mt-0" >
+    <div class="restaurant-heading row justify-content-center " id="divToScroll">
+        <div class="col-lg-8">
+        <h2>Best picks for our DINESPOTTERS!
+        </h2>
+        <!-- <p>Explore the most-reviewed restaurants in your city's culinary scene.</p> -->
+        <p class="mt-3 mb-2">Tired of hits and trials when it comes to finding restaurants every time you go to a new city? Want to find <a [routerLink]="['/about']" class="text-orange">best restaurants near you </a> easily? Dinespotting makes it easy for you find the best restaurants wherever you are! By providing you with the top rated restaurants based on various different ratings! Making it easy to find restaurants with a single search. Try it now!</p>
+    </div>
+    </div>
+    <div class="restaurant-wrapper">
+        <div class="row row-m">
+         <div class="no-result-main" *ngIf="this.totalRestaurants == 0">No result found.</div>
+            <!--Box 1--->
+            <div (click)="details(data)" style="cursor: pointer;" class="col-lg-3 col-md-6 col-12" *ngFor="let data of restaurantData | paginate: { itemsPerPage: limit, currentPage: offset,totalItems: totalCount}">
+                <div class="cards">
+                    <div class="row cards-content card-header">
+                        <div class="col-7">
+                            <div class="">
+                                <h6 title={{data.name}}>{{data.name}}</h6>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <ul class="d-flex text-nowrap justify-content-end">
+                                <li><img src="assets/img/google-icon.svg" alt=""></li>
+                                <li><img src="assets/img/red-icon.svg" alt=""></li>
+                                <li><img class="icon-img" src="assets/img/tripadvisor-logo.png" alt=""></li>
+                                <!-- <li><img src="assets/img/openTable-icon.svg" alt=""></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row cards-content card-header">
+                        <div class="col-md-6 col-sm-12 card-location">
+                            <span class="blue" title={{data.location.address1}}{{data.location.city}}>{{data.location.address1 + data.location.city }}</span>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="d-flex card-right justify-content-end">
+                                <ngb-rating  [starTemplate]="t"  [(rate)]="data.rating" [max]="5" [readonly]="true"></ngb-rating>
+                                <p class="rating-text">{{data.rating}}/5</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #t let-fill="fill">
+                        <div class="star" [class.full]="fill === 100">
+                          <div class="half" [style.width.%]="fill">&#9733;</div>&#9733;
+                        </div>
+                     </ng-template> 
+                    <!-- <div class="card-header">
+                        
+                        <div class="card-left">
+                            <h6 title={{data.name}}>{{data.name | string}}</h6>
+                            <span class="blue" title={{data.location.address1}}{{data.location.city}}>{{data.location.address1 + data.location.city | string}}</span>
+                        </div>
+                        <div class="card-right"> -->
+                            <!-- <ngx-star-rating [(ngModel)]="data.rating" [id]="'rating'" [disabled]="true"></ngx-star-rating> -->
+                            <!-- <img src="assets/img/stars.svg" alt=""> -->
+                            <!-- <bar-rating class="star" [(rate)]="data.rating" [max]="5"></bar-rating> -->
+                            <!-- <ngb-rating   [(rate)]="data.rating" [max]="5" [readonly]="true"></ngb-rating>
+                            <p class="rating-text">{{data.rating}}/5</p>
+                        </div>
+                    </div>-->
+                    <div class="header-body">
+                        <img src={{data.image_url}} class="card-img img-fluid" alt="">
+                    </div> 
+                </div>
+            </div>
+
+            <pagination-controls class="pagination-list" *ngIf="this.totalRestaurants>0" (pageChange)="pageChangeEvent($event)"></pagination-controls>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!----Popular Restaurants ends-->

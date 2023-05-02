@@ -1,0 +1,90 @@
+.process_box {
+    background: #fff;
+    border-radius: 40px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.text-center {
+    text-align: center!important;
+}
+.position-relative {
+    position: relative!important;
+}
+.d-inline-block {
+    display: inline-block!important;
+}
+section.login-signup-common img.user-pic {
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+}
+.b-s-btn-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+.services-title label.ads-title, .label-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+}
+input.form-control, .content-form input.form-control, body .intl-tel-input input, form.profile-form input.form-control, select.select-menu, input#profile-dob, .internation-phone {
+    border: 1px solid #C9C9C9;
+    border-radius: 5px;
+    padding: 13px 13px;
+    height: auto;
+    vertical-align: middle;
+    max-height: 46px;
+}
+
+.b-s-btn-wrapper input[type="file"] {
+    opacity: 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+.box_wrap {
+    padding: 30px;
+    max-width: 675px;
+}
+.sign_btn{
+    max-width:286px
+}
+.sign_btn{
+    max-width: 286px;
+    text-align: center;
+    text-decoration: none;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+.sign_btn:hover{color:#fff;text-decoration: none;}
+input.form-control::placeholder {
+    font-size: 13px;
+    color: #707070;
+}
+.password-wrap {
+    position: relative;
+    cursor: pointer;
+}
+.eye {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    display: inline-block;
+}
+
+.resend_otp_wrap{text-align:center;margin-top:25px;}
+.resend_otp_wrap a{color:#27adeb;font-weight: 700;font-size:14px;}
+.submitbtn {
+    margin-top: 15px;
+}
+
